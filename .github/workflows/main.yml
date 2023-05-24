@@ -42,6 +42,5 @@ jobs:
     - name: Build image
       run: |
         # сборка образа
-        cd ..
         docker build ..
 
