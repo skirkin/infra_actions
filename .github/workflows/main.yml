@@ -42,5 +42,5 @@ jobs:
     - name: Build image
       run: |
         # сборка образа
-        docker build ..
+        docker build .
 
