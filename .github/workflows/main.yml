@@ -19,18 +19,28 @@ jobs:
 
     - name: Install dependencies
       run: |
-        # обновление pip
+        # РѕР±РЅРѕРІР»РµРЅРёРµ pip
         python -m pip install --upgrade pip
-        # установка flake8 и его плагинов
+        # СѓСЃС‚Р°РЅРѕРІРєР° flake8 Рё РµРіРѕ РїР»Р°РіРёРЅРѕРІ
         pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
-        # установка зависимостей
+        # СѓСЃС‚Р°РЅРѕРІРєР° Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№
         pip install -r requirements.txt
 
     - name: Test with flake8 and django tests
       run: |
-        # запуск проверки проекта по flake8
+        # Р·Р°РїСѓСЃРє РїСЂРѕРІРµСЂРєРё РїСЂРѕРµРєС‚Р° РїРѕ flake8
         python -m flake8
-        # перейти в папку, содержащую manage.py
+        # РїРµСЂРµР№С‚Рё РІ РїР°РїРєСѓ, СЃРѕРґРµСЂР¶Р°С‰СѓСЋ manage.py вЂ” 
         cd infra_project/
-        # запустить написанные разработчиком тесты
+        # Р·Р°РїСѓСЃС‚РёС‚СЊ РЅР°РїРёСЃР°РЅРЅС‹Рµ СЂР°Р·СЂР°Р±РѕС‚С‡РёРєРѕРј С‚РµСЃС‚С‹
         python manage.py test
+
+  build_docker_image:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+    - name: Build image
+      run: |
+        # СЃР±РѕСЂРєР° РѕР±СЂР°Р·Р°
+        docker build .
+
